@@ -14,5 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if(!Auth::guard('web')){
+        return view('welcome');
+    }
+    return redirect()->route('hotelsIndex');
+});
+
+Auth::routes();
+// Auth::routes(['register' => false]);
+
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::POST('/customer/register', 'Customer\CustomerController@registerCustomer')->name('customerRegister');
+Route::middleware('auth:web')->group(function () {
+    Route::get('/hotels', 'Admin\HotelController@index')->name('hotelsIndex');
 });
