@@ -61,16 +61,13 @@ class LoginController extends Controller
             ]);
 
             if($validation->fails()){
-                return response()->json([
-                    'message' => 'validation failed',
-                    'data' => $validation->errors()
-                ]);
+                return redirect()->route('hotelsIndex')->with('info', $validation->errors());
             } else {
                 $credentials = ['email'=> $request['email'], 'password' => $request['password']];
                 if(Auth::guard('web')->attempt($credentials)){
-                    return redirect()->route('hotelsIndex');
+                    return redirect()->route('hotelsIndex')->with('success', 'Successfuly logged In..');
                 } else {
-                    return redirect()->route('home');
+                    return redirect()->route('home')->with('warning', 'Login Failed..');
                 }
             }
         }

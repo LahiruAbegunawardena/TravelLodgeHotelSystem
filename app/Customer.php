@@ -19,7 +19,7 @@ class Customer extends Authenticatable implements JWTSubject
      */
     protected $fillable = [
         'first_name', 'last_name', 'email', 'password',
-        'is_verified', 'contact_no_1', 'contact_no_2'
+        'is_verified', 'contact_no_1', 'contact_no_2','created_at', 'updated_at'
     ];
 
     /**

@@ -22,10 +22,6 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ Auth::user()->user_name }}
                                     </a>
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            {{ csrf_field() }}
-          </form>
-          {{-- <a href="{{ route('logout') }}" class="d-block">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a> --}}
         </div>
       </div>
 

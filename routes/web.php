@@ -26,5 +26,7 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::POST('/customer/register', 'Customer\CustomerController@registerCustomer')->name('customerRegister');
 Route::middleware('auth:web')->group(function () {
-    Route::get('/hotels', 'Admin\HotelController@index')->name('hotelsIndex');
+    Route::get('/admin/hotels', 'Admin\HotelController@index')->name('hotelsIndex');
+    Route::get('/admin/hotels/create', 'Admin\HotelController@create')->name('hotelsCreate');
+    Route::post('/admin/hotels/store', 'Admin\HotelController@store')->name('hotelStore');
 });
