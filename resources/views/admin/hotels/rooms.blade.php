@@ -85,9 +85,9 @@
                         <td>
                           @if($hotelRoom->is_ac == 1) Yes @else No @endif
                         </td>
-                        <td>Rs. {{$hotelRoom->price_per_night}}</td>
+                        <td>Rs. {{number_format($hotelRoom->price_per_night, 2, ".", "")}}</td>
                         <td>
-                          <a href="{{url('/admin/hotel-room/'.$hotelRoom->id.'/check-availability')}}" class="btn btn-block bg-gradient-info btn-xs"> Check Availability </a>
+                          <a href="{{url('/admin/hotel-room/'.$hotelRoom->id.'/check-availability')}}" class="btn btn-block bg-gradient-info btn-xs"> Check Reservations </a>
                         </td>
                       </tr>
                     @endforeach

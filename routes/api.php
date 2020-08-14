@@ -24,6 +24,9 @@ Route::POST('/customer/login', 'Api\CustomerApiController@loginCustomer');
 Route::middleware('auth:api')->group(function () {
     Route::POST('/customer/logout', 'Api\CustomerApiController@logout');
     Route::GET('/customer/profile', 'Api\CustomerApiController@profile');
+    Route::GET('/hotel-list', 'Api\ReservationApiController@getHotelDetails');
+    Route::POST('/rooms/reserve', 'Api\ReservationApiController@reserveRooms');
+    Route::GET('/my-reservations', 'Api\ReservationApiController@myReservations');
 });
 
 

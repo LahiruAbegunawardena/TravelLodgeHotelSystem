@@ -21,4 +21,9 @@ class IndividualHotelRoomModel extends Model
      */
     protected $hidden = ["created_at", "updated_at"];
 
+    public function reservations()
+    {
+        return $this->hasMany(ReservationModel::class, 'individual_hotel_room_id');
+    }
+
 }

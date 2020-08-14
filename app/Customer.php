@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\BO\Models\ReservationModel;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
+use App\BO\Models\IndividualHotelRoomModel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+
 class Customer extends Authenticatable implements JWTSubject
 {
     use Notifiable;
@@ -49,5 +52,10 @@ class Customer extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function reserve()
+    {
+        return $this->belongsToMany(IndividualHotelRoomModel::class, ReservationModel::class, 'customers_id', 'individual_hotel_room_id')->withPivot('id', 'invoice_id', 'checkin_date_time', 'checkout_date_time', 'reserved_date_time', 'price');
     }
 }

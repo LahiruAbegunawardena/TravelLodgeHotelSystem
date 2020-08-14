@@ -2,7 +2,6 @@
 
 namespace App\BO\Services;
 
-use App\Student;
 use App\CommonBase\Service;
 use Illuminate\Http\Request;
 use App\BO\Repositories\HotelRepostory;

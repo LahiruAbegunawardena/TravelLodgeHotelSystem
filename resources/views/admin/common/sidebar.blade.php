@@ -30,9 +30,19 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="{{route('hotelsIndex')}}" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
+              <i class="nav-icon fas fa-hotel"></i>
               <p>
                 Hotels Management
+              </p>
+            </a>
+          </li>
+        </ul>
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="{{route('customersIndex')}}" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Customers Management
               </p>
             </a>
           </li>

@@ -33,4 +33,7 @@ Route::middleware('auth:web')->group(function () {
     Route::put('/admin/hotels/{hotel_id}/update', 'Admin\HotelController@updateHotel')->name('updateHotel');
     Route::get('/admin/hotels/{hotel_id}/rooms', 'Admin\HotelController@viewHotelRooms')->name('hotelRooms');
     Route::post('/admin/hotels/{hotel_id}/update-rooms', 'Admin\HotelController@updateHotelRooms')->name('updateRooms');
+
+    Route::get('/admin/customers', 'Admin\CustomerController@index')->name('customersIndex');
+
 });
