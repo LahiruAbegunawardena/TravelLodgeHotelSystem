@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\BO\Services\HotelService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use App\BO\Models\IndividualHotelRoomModel;
 
 class HotelController extends Controller
 {
@@ -15,8 +16,7 @@ class HotelController extends Controller
      * @return void
      */
     protected $hotelService;
-    public function __construct(HotelService $hotelService)
-    {
+    public function __construct(HotelService $hotelService){
         $this->hotelService = $hotelService;
     }
 
@@ -25,8 +25,7 @@ class HotelController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
+    public function index(){
         $data["hotelsData"] = $this->hotelService->getAllHotels();
         return view('admin.hotels.index', $data);
     }
@@ -52,6 +51,48 @@ class HotelController extends Controller
                 return redirect()->route('hotelsIndex')->with('warning', 'Failed hotel creation..');
             }
         }
+    }
+
+    public function editHotel(int $hotel_id){
+        $data["hotel_data"] = $this->hotelService->getHotelById($hotel_id);
+        $data["hotel_id"] = $hotel_id;
+        // dd($data);
+        return view('admin.hotels.edit', $data);
+    }
+
+    public function updateHotel(int $hotel_id, Request $request){
+        $validation = Validator::make($request->all(), [
+            'hotel_name' => 'required|string|max:255',
+            'address' => 'required',
+            'longitude' => 'required',
+            'latitude' => 'required'
+        ]);
+        if($validation->fails()){
+            return redirect()->route('hotelsIndex')->with('info', $validation->errors());
+        } else {
+            $newHotel = $this->hotelService->updateHotel($hotel_id, $request);
+            if(isset($newHotel)){
+                return redirect()->route('hotelsIndex')->with('success', 'Hotel updated successfuly..');
+            } else {
+                return redirect()->route('hotelsIndex')->with('warning', 'Failed hotel update..');
+            }
+        }
+    }
+
+    public function viewHotelRooms(int $hotel_id){
+        $hotelData = $this->hotelService->getHotelById($hotel_id);
+        $data["single_bedroom_count"] = count(IndividualHotelRoomModel::where(['no_of_beds' => 1, 'hotels_id' => $hotel_id])->get());
+        $data["double_bedroom_count"] = count(IndividualHotelRoomModel::where(['no_of_beds' => 2, 'hotels_id' => $hotel_id])->get());
+        $data["hotel_data"] = $hotelData;
+        $data["hotel_rooms"] = $this->hotelService->getRoomsByHotelId($hotel_id);
         
+        return view('admin.hotels.rooms', $data);
+
+    }
+
+    public function updateHotelRooms(int $hotel_id, Request $request){
+        $hotelRoomData = $this->hotelService->updateHotelRooms($hotel_id, $request);
+        return redirect('/admin/hotels/'.$hotel_id.'/rooms')->with('success', 'Hotel Rooms updated successfuly..');
+
     }
 }

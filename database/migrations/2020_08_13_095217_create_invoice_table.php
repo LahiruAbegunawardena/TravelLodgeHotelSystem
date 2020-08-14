@@ -17,6 +17,7 @@ class CreateInvoiceTable extends Migration
             $table->id();
             $table->double('total_price');
             $table->tinyInteger('is_paid');
+            $table->integer('admins_id');
             $table->timestamps();
         });
     }

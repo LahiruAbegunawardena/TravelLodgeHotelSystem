@@ -29,4 +29,8 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/admin/hotels', 'Admin\HotelController@index')->name('hotelsIndex');
     Route::get('/admin/hotels/create', 'Admin\HotelController@create')->name('hotelsCreate');
     Route::post('/admin/hotels/store', 'Admin\HotelController@store')->name('hotelStore');
+    Route::get('/admin/hotels/{hotel_id}/edit', 'Admin\HotelController@editHotel');
+    Route::put('/admin/hotels/{hotel_id}/update', 'Admin\HotelController@updateHotel')->name('updateHotel');
+    Route::get('/admin/hotels/{hotel_id}/rooms', 'Admin\HotelController@viewHotelRooms')->name('hotelRooms');
+    Route::post('/admin/hotels/{hotel_id}/update-rooms', 'Admin\HotelController@updateHotelRooms')->name('updateRooms');
 });

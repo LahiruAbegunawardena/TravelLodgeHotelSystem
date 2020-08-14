@@ -4,14 +4,15 @@ namespace App\BO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class HotelModel extends Model
+class ReservationModel extends Model
 {
 
-    protected $table = "hotels";
+    protected $table = "reservation";
     protected $primaryKey = "id";
 
     protected $fillable = [
-        'hotel_name', 'longitude', 'latitude', 'address',
+        'customers_id', 'individual_hotel_room_id', 'invoice_id',
+        'checkin_date_time', 'checkout_date_time', 'reserved_date_time', 'price'
     ];
 
     /**
@@ -21,8 +22,5 @@ class HotelModel extends Model
      */
     protected $hidden = ["created_at", "updated_at"];
 
-    public function individualHotelRooms()
-    {
-        return $this->hasMany(IndividualHotelRoomModel::class);
-    }
+    
 }

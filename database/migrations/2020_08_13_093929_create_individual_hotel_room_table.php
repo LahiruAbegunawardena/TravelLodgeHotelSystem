@@ -15,8 +15,12 @@ class CreateIndividualHotelRoomTable extends Migration
     {
         Schema::create('individual_hotel_room', function (Blueprint $table) {
             $table->id();
-            $table->integer('hotel_room_id');
-            $table->text('room_code');
+            $table->integer('hotels_id');
+            $table->integer('no_of_beds');
+            $table->tinyInteger('is_ac');
+            // $table->text('room_code');
+            $table->double('price_per_night');
+
             $table->timestamps();
         });
     }

@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Customer;
 use Exception;
 use App\Customer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;
 

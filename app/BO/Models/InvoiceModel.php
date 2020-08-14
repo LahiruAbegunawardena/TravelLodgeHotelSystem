@@ -4,14 +4,14 @@ namespace App\BO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RoomTypeModel extends Model
+class InvoiceModel extends Model
 {
 
-    protected $table = "room_type";
+    protected $table = "invoice";
     protected $primaryKey = "id";
 
     protected $fillable = [
-        'no_of_beds', 'is_ac'
+        'total_price', 'is_paid', 'admins_id'
     ];
 
     /**
@@ -19,6 +19,7 @@ class RoomTypeModel extends Model
      *
      * @var array
      */
-    protected $hidden = [];
+    protected $hidden = ["created_at", "updated_at"];
 
+    
 }

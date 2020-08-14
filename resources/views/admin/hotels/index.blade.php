@@ -64,7 +64,7 @@
                         Bed x 3 Rooms: 
                       </td>
                       <td>
-                        {{-- <a href="{{url('/admin/hotels/'.$hotel->id.'/edit')}}" class="btn btn-block bg-gradient-info btn-xs"> Edit </a> --}}
+                        <a href="{{url('/admin/hotels/'.$hotel->id.'/edit')}}" class="btn btn-block bg-gradient-info btn-xs"> Edit </a>
                         <a href="{{url('/admin/hotels/'.$hotel->id.'/rooms')}}" class="btn btn-block bg-gradient-info btn-xs"> Rooms Details </a>
                       </td>
                     </tr>
