@@ -2,6 +2,8 @@
 
 namespace App\BO\Models;
 
+use App\Customer;
+use App\BO\Models\ReservationModel;
 use Illuminate\Database\Eloquent\Model;
 
 class IndividualHotelRoomModel extends Model
@@ -26,4 +28,12 @@ class IndividualHotelRoomModel extends Model
         return $this->hasMany(ReservationModel::class, 'individual_hotel_room_id');
     }
 
+    public function customers()
+    {
+        return $this->belongsToMany(Customer::class, ReservationModel::class, 'individual_hotel_room_id', 'customers_id')->withPivot('id', 'invoice_id', 'checkin_date_time', 'checkout_date_time', 'reserved_date_time', 'price');
+    }
+    public function belongedHotel()
+    {
+        return $this->belongsTo(HotelModel::class, 'hotels_id');
+    }
 }

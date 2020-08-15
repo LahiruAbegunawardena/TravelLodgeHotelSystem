@@ -78,20 +78,4 @@ class HotelController extends Controller
             }
         }
     }
-
-    public function viewHotelRooms(int $hotel_id){
-        $hotelData = $this->hotelService->getHotelById($hotel_id);
-        $data["single_bedroom_count"] = count(IndividualHotelRoomModel::where(['no_of_beds' => 1, 'hotels_id' => $hotel_id])->get());
-        $data["double_bedroom_count"] = count(IndividualHotelRoomModel::where(['no_of_beds' => 2, 'hotels_id' => $hotel_id])->get());
-        $data["hotel_data"] = $hotelData;
-        $data["hotel_rooms"] = $hotelData->individualHotelRooms;
-        return view('admin.hotels.rooms', $data);
-
-    }
-
-    public function updateHotelRooms(int $hotel_id, Request $request){
-        $hotelRoomData = $this->hotelService->updateHotelRooms($hotel_id, $request);
-        return redirect('/admin/hotels/'.$hotel_id.'/rooms')->with('success', 'Hotel Rooms updated successfuly..');
-
-    }
 }

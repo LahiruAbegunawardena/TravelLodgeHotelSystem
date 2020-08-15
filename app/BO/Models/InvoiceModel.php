@@ -21,5 +21,9 @@ class InvoiceModel extends Model
      */
     protected $hidden = ["created_at", "updated_at"];
 
+    public function reservations ()
+    {
+        return $this->hasMany(ReservationModel::class, "invoice_id");
+    }
     
 }

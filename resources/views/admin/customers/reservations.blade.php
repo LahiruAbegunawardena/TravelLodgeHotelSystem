@@ -7,7 +7,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Customers Management</h1>
+          <h1>Customer Reservations</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -28,51 +28,48 @@
             <div class="card-header">
               
               <div class="row">
-                <h3 class="card-title col-md-10">Customer Details</h3>
+                <h3 class="card-title col-md-10">Customer Reservations Details</h3>
               </div>
               
 
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="customerDet" class="table table-bordered table-striped">
+              <table id="roomReserveationDet" class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Contact No - 1</th>
-                    <th>Contact No - 2</th>
-                    <th>Action</th>
+                    <th>Invoice Id</th>
+                    <th>Hotel Name</th>
+                    <th>Room Id</th>
+                    <th>Check-In Date</th>
+                    <th>Check-Out Date</th>
+                    <th>Reserved Date</th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  @foreach ($customers as $key => $customer)
+                  @foreach ($reservations as $key => $reservation)
                     <tr>
                       <td>{{$key + 1}}</td>
-                      <td>{{$customer->first_name}}</td>
-                      <td>{{$customer->last_name}}</td>
-                      <td>{{$customer->email}}</td>
-                      <td>{{$customer->contact_no_1}}</td>
-                      <td>{{$customer->contact_no_2}}</td>
-                      <td>
-                        <a href="{{url('/admin/customer/'.$customer->id.'/reservations')}}" class="btn btn-block bg-gradient-info btn-xs"> Check Reservations </a>
-
-                      </td>
+                      <td>{{$reservation->reservation->invoice_id}}</td>
+                      <td>{{$reservation->hotelname}}</td>
+                      <td>{{$reservation->reservation->individual_hotel_room_id}}</td>
+                      <td>{{$reservation->reservation->checkin_date_time}}</td>
+                      <td>{{$reservation->reservation->checkout_date_time}}</td>
+                      <td>{{$reservation->reservation->reserved_date_time}}</td>
                     </tr>
                   @endforeach
                 </tbody>
                 <tfoot>
                   <tr>
                     <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Contact No - 1</th>
-                    <th>Contact No - 2</th>
-                    <th>Email</th>
-                    <th>Action</th>
+                    <th>Invoice Id</th>
+                    <th>Hotel Name</th>
+                    <th>Room Id</th>
+                    <th>Check-In Date</th>
+                    <th>Check-Out Date</th>
+                    <th>Reserved Date</th>
                   </tr>
                 </tfoot>
               </table>

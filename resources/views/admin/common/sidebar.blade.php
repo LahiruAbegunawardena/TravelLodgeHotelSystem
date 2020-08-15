@@ -47,6 +47,16 @@
             </a>
           </li>
         </ul>
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="{{route('invoice-list')}}" class="nav-link">
+              <i class="nav-icon fas fa-credit-card"></i>
+              <p>
+                Invoice Management
+              </p>
+            </a>
+          </li>
+        </ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>

@@ -8,4 +8,14 @@ $(function () {
         "responsive": true,
         "autoWidth": false,
     });
+
+    $('#customerDet').DataTable({
+        "responsive": true,
+        "autoWidth": false,
+    });
+
+    $('#roomReserveationDet').DataTable({
+        "responsive": true,
+        "autoWidth": false,
+    });
 });

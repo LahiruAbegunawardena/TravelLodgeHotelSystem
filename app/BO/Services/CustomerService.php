@@ -19,5 +19,8 @@ class CustomerService extends Service {
         return $customers;
     }
 
-    
+    public function getCustomerById($customer_id){
+        $customers = $this->customerRepostory->getCustomerById($customer_id);
+        return $customers;
+    }
 }
