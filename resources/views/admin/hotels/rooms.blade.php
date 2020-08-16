@@ -25,6 +25,7 @@
       
       <div class="row">
         <div class="col-md-12">
+          @if(count($hotel_rooms) > 0)
             <div class="card">
               <div class="card-header">
                   <h4 class="card-title">Room Reservation</h4>
@@ -51,6 +52,7 @@
                   {{ Form::close() }}
               </div>
             </div>
+          @endif
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title"> Update Hotel Rooms</h4>

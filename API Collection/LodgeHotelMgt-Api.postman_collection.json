@@ -1,0 +1,222 @@
+{
+	"variables": [],
+	"info": {
+		"name": "LodgeHotelMgt-Api",
+		"_postman_id": "77d90718-05df-aedd-95f6-2722e38afc1c",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "customer",
+			"description": "",
+			"item": [
+				{
+					"name": "RegisterCustomer",
+					"request": {
+						"url": "http://localhost:8100/api/customer/register",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"first_name\": \"Lahiru\",\n\t\"last_name\": \"Abegunawardena\",\n\t\"contact_no_1\": \"0710123654\",\n\t\"contact_no_2\": \"0112123654\",\n\t\"email\": \"wls@gmail.com\",\n\t\"password\": \"12345678\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCustomerProfile",
+					"request": {
+						"url": "http://localhost:8100/api/customer/update",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{customerToken}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"first_name\": \"Lahiru\",\n    \"last_name\": \"Abegunawardena\",\n    \"email\": \"wls@gmail.com\",\n    \"contact_no_1\": \"0710123654\",\n    \"contact_no_2\": \"0112123654\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "LoginCustomer",
+					"request": {
+						"url": "http://localhost:8100/api/customer/login",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"wls@gmail.com\",\n\t\"password\": \"12345678\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "customerProfile",
+					"request": {
+						"url": "http://localhost:8100/api/customer/profile",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{customerToken}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"dwh@gmail.com\",\n\t\"password\": \"12345678\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "LogoutCustomer",
+					"request": {
+						"url": "http://localhost:8100/api/customer/logout",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{customerToken}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reservations",
+			"description": "",
+			"item": [
+				{
+					"name": "retrieve Hotel List",
+					"request": {
+						"url": "http://localhost:8100/api/hotel-list",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{customerToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "My Reservations",
+					"request": {
+						"url": "http://localhost:8100/api/my-reservations",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{customerToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getAvailableRooms",
+					"request": {
+						"url": "http://localhost:8100/api/hotel/available-rooms",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{customerToken}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"hotel_id\":1,\n\t\"checkin\": \"2020-08-20\",\n\t\"checkout\": \"2020-08-26\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Room reserve",
+					"request": {
+						"url": "http://localhost:8100/api/rooms/reserve",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{customerToken}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"rooms\":[1,2],\n\t\"checkin\": \"2020-08-20\",\n\t\"checkout\": \"2020-08-26\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

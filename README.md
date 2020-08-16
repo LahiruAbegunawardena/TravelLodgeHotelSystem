@@ -31,7 +31,8 @@ Customer can register via -> http://localhost:8100/api/customer/register api.
     1. Add your hotel details
     2. Add room details.
     3. View Reservations for each hotel room
-    4. Check If there is available Room in given date range
+    4. If(no_of_rooms > 0 in selected room)
+        Check If there is available Room in given date range
     5. Reserve room at hotel desk
 
     -------- Customers Management --------
