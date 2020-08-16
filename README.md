@@ -1,3 +1,77 @@
+----------------------------------------------------------------------------------------
+-----------------------                                          -----------------------
+-----------------------   Travel Lodge Hotel Management System   -----------------------
+-----------------------                                          -----------------------
+----------------------------------------------------------------------------------------
+
+--------------------------------   Project Initiation   --------------------------------
+
+    1). composer update
+    2). npm install
+    3). create .env file and set values
+    4). php artisan key:generate
+    5). php artisan migrate
+    6). php artisan db:seed (admin db table)
+    7). php artisan jwt:secret
+    8). php artisan serve --port=8100
+
+----------------------------------------------------------------------------------------
+
+Admin registered through seed. (email:- admin@gmail.com pwd: admn1234).
+I didn't implememnt seperate admin registration. You can add more through seed.
+
+Customer can register via -> http://localhost:8100/api/customer/register api.
+
+
+
+------------------------------------- Admin  Panel -------------------------------------
+
+    -------- Hotel Management --------
+
+    1. Add your hotel details
+    2. Add room details.
+    3. View Reservations for each hotel room
+
+    -------- Customers Management --------
+    1. View Registered customers
+    2. View reservations done by customers
+
+    -------- Invoice Management --------
+    1. Invoice details and setlle them
+
+    Assumptions
+        1. There are only 2 kinds of bedrooms (Single/Double)
+        2. Fixed Price per night (Single bedroom - 2500 / Double bedroom - 4000)
+
+
+------------------------------------- Customer Api  -------------------------------------
+
+    Non - Authenticated api endpoints
+        1. Customer Registration http://localhost:8100/api/customer/register
+        2. Customer Login http://localhost:8100/api/customer/login
+
+    Authenticated api endpoints -->
+        
+        ***
+            Add Token recieved through login api with "bearer " prefix 
+            and it into request header as Authorization
+        ***
+        
+        1. Customer Profile Details
+        2. Customer Profile Update
+        3. Customer Profile logout
+        3. View Hotel Details and rooms (Hotel details, no of rooms)
+        5. View My reservation list
+        6. Reserve hotel rooms (request body -> room_no, checkin date, checkout date )
+
+    Assumptions
+        1. Default Checkin/Checkout time 1200 Hrs
+
+----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">

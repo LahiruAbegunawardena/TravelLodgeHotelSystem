@@ -16,7 +16,7 @@ class InvoiceController extends Controller
 
     public function getAllInvoices() {
         $data["invoices"] = $this->invoiceService->getAllInvoices();
-        // dd($data);
+        
         return view('admin.invoices.index', $data);
     }
 

@@ -14,14 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    if(!Auth::guard('web')){
+    if(!Auth::guard('web')->user()){
         return view('welcome');
     }
     return redirect()->route('hotelsIndex');
 });
 
-Auth::routes();
-// Auth::routes(['register' => false]);
+// Auth::routes();
+Auth::routes(['register' => false]);
 
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::POST('/customer/register', 'Customer\CustomerController@registerCustomer')->name('customerRegister');

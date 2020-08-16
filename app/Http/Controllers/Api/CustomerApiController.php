@@ -53,6 +53,44 @@ class CustomerApiController extends Controller
         }
     }
 
+    public function updateCustomer(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255'
+        ]);
+        if($validation->fails()){
+            return response()->json([
+                'status' => false, 
+                'message' => 'validation failed',
+                'data' => $validation->errors()
+            ]); 
+        }
+        else{
+            try {
+                $customer_data = $request->request->all();
+                $customer = Auth::guard('api')->user();
+                $customer->update([
+                    'first_name' => $customer_data['first_name'],
+                    'last_name' => $customer_data['last_name'],
+                    'contact_no_1' => $customer_data['contact_no_1'],
+                    'contact_no_2' => $customer_data['contact_no_2']
+                ]);
+                return response()->json([
+                    "status" => true,
+                    "message" => "Customer Profile updated..",
+                    'customer_profile' => Auth::guard('api')->user()
+                ]);
+
+            } catch (Exception $ex) {
+                return response()->json([
+                    "message" => "Exception occured",
+                    "exception" => $ex->getMessage()
+                ]);
+            }
+        }   
+    }
+
     public function loginCustomer(Request $request){
         
         $validation = Validator::make($request->all(), [

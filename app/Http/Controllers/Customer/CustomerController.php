@@ -21,10 +21,12 @@ class CustomerController extends Controller
                 'password' => 'required|string|min:8'
             ]);
             if($validation->fails()){
-                return response()->json([
-                    'message' => 'validation failed',
-                    'data' => $validation->errors()
-                ]); 
+                return redirect()->url('')->with('warning', json_encode($validation->errors()));
+
+                // return response()->json([
+                //     'message' => 'validation failed',
+                //     'data' => 
+                // ]); 
             }
             else{
                 $newStudent = Customer::create([
@@ -34,11 +36,11 @@ class CustomerController extends Controller
                     'email_verified_at' => now(),
                     'password' => bcrypt($data['password'])
                 ]);
-                return redirect()->route('home')->with('success', 'Customer Registered Successfully.. Wait for verification to login..');
+                return redirect()->url('')->with('success', 'Customer Registered Successfully..');
 
             }
         } catch (QueryException $e){
-            return redirect()->route('home')->with('success', 'Customer Registered Successfully.. Wait for verification to login..');
+            return redirect()->url('')->with('warning', 'Customer Registration failed..');
 
         }
     }

@@ -22,11 +22,11 @@ class InvoiceService extends Service {
             $obj = $invoice;
             $obj->total_price_format = number_format($invoice->total_price, 2, ".", "");
             $reservations = $invoice->reservations;
-            $obj->checkin_date_time = ($reservations[0]->checkin_date_time) ? $reservations[0]->checkin_date_time : null;
-            $obj->checkout_date_time = ($reservations[0]->checkout_date_time) ? $reservations[0]->checkout_date_time : null;
-            $obj->reserved_date_time = ($reservations[0]->reserved_date_time) ? $reservations[0]->reserved_date_time : null;
-            $hotel_room_id = $reservations[0]->individual_hotel_room_id;
-            $obj->hotel = IndividualHotelRoomModel::find($hotel_room_id)->belongedHotel;
+            $obj->checkin_date_time = isset($reservations[0]->checkin_date_time) ? $reservations[0]->checkin_date_time : null;
+            $obj->checkout_date_time = isset($reservations[0]->checkout_date_time) ? $reservations[0]->checkout_date_time : null;
+            $obj->reserved_date_time = isset($reservations[0]->reserved_date_time) ? $reservations[0]->reserved_date_time : null;
+            $hotel_room_id = isset($reservations[0]->individual_hotel_room_id) ? $reservations[0]->individual_hotel_room_id : null;
+            $obj->hotel = isset($hotel_room_id) ? (IndividualHotelRoomModel::find($hotel_room_id)->belongedHotel) : null;
             $obj->reservations = $reservations;
             $invoicesArr[] = $obj;
         }
