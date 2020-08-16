@@ -62,7 +62,7 @@ Customer can register via -> http://localhost:8100/api/customer/register api.
         3. Customer Profile logout
         3. View Hotel Details and rooms (Hotel details, no of rooms)
         5. View My reservation list
-        6. Reserve hotel rooms (request body -> room_no, checkin date, checkout date )
+        6. Reserve hotel rooms (request body -> room_no, checkin date, checkout date)
 
     Assumptions
         1. Default Checkin/Checkout time 1200 Hrs

@@ -83,4 +83,53 @@ class ReservationApiController extends Controller{
             'reservation_data' => $user->reserve
         ]);
     }
+
+    public function checkAvailablityOfHotel(Request $request) {
+        $checkin = strtotime($request["checkin"]." 12:00:00");
+        $checkout = strtotime($request["checkout"]." 12:00:00");
+        $hotel_id = $request["hotel_id"];
+
+        $hotelRooms = $this->hotelService->getRoomsByHotelId($hotel_id);
+
+        $available_hotel_rooms = [];
+        foreach ($hotelRooms as $key => $hotelRoom) {
+            $reservations_of_room = $hotelRoom->reservations;
+            $check = true;
+            foreach ($reservations_of_room as $key2 => $reservation) {
+                $reservation_checkIn  = strtotime($reservation->checkin_date_time);
+                $reservation_checkOut = strtotime($reservation->checkout_date_time);
+                
+                if(($checkin<=$reservation_checkIn)){
+                    // current reservation checkin after or at same time to your checkin
+                    if($reservation_checkIn<$checkout){
+                        // current reservation checkin before your checkout
+                        $check = false; break;
+                    }
+
+                    if($reservation_checkOut<=$checkout){
+                        // current reservation checkouts before or at same to your checkout
+                        $check = false; break;
+                    }
+                }
+
+                if($checkin>=$reservation_checkIn && $checkin<$reservation_checkOut){
+                    //your checkin is between current reservation checkin & checkout
+                    $check  = false; break;
+                }
+            }
+
+            if($check == true){
+                $available_hotel_rooms[] = $hotelRoom;
+            }
+        }
+
+        return response()->json([
+            'status' => true,
+            'checkIn' => $request["checkin"]." 12:00:00",
+            'checkout' => $request["checkout"]." 12:00:00",
+            'message' => 'Available Rooms recieved..',
+            'reservation_data' => $available_hotel_rooms
+        ]);
+
+    }
 }

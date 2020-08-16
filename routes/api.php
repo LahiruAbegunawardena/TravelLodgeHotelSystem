@@ -27,6 +27,7 @@ Route::middleware('auth:api')->group(function () {
     Route::GET('/customer/profile', 'Api\CustomerApiController@profile');
     Route::GET('/hotel-list', 'Api\ReservationApiController@getHotelDetails');
     Route::POST('/rooms/reserve', 'Api\ReservationApiController@reserveRooms');
+    Route::POST('/hotel/available-rooms', 'Api\ReservationApiController@checkAvailablityOfHotel');
     Route::GET('/my-reservations', 'Api\ReservationApiController@myReservations');
 });
 
