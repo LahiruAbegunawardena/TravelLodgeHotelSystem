@@ -31,6 +31,8 @@ Customer can register via -> http://localhost:8100/api/customer/register api.
     1. Add your hotel details
     2. Add room details.
     3. View Reservations for each hotel room
+    4. Check If there is available Room in given date range
+    5. Reserve room at hotel desk
 
     -------- Customers Management --------
     1. View Registered customers
@@ -60,9 +62,11 @@ Customer can register via -> http://localhost:8100/api/customer/register api.
         1. Customer Profile Details
         2. Customer Profile Update
         3. Customer Profile logout
-        3. View Hotel Details and rooms (Hotel details, no of rooms)
+    
+        4. View Hotel Details and rooms (Hotel details, no of rooms)
         5. View My reservation list
-        6. Reserve hotel rooms (request body -> room_no, checkin date, checkout date)
+        6. View available rooms on duration of selected hotel
+        7. Reserve hotel rooms (request body -> room_no, checkin date, checkout date)
 
     Assumptions
         1. Default Checkin/Checkout time 1200 Hrs

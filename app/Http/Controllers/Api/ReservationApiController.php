@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\BO\Models\InvoiceModel;
 use App\BO\Services\HotelService;
 use App\Http\Controllers\Controller;
+use App\BO\Services\HotelRoomService;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;
 use App\BO\Models\IndividualHotelRoomModel;
@@ -17,8 +18,10 @@ use App\BO\Transformations\HotelTransformable;
 class ReservationApiController extends Controller{
     use HotelTransformable;
     protected $hotelService;
-    public function __construct(HotelService $hotelService) {
+    protected $hotelRoomService;
+    public function __construct(HotelService $hotelService, HotelRoomService $hotelRoomService) {
         $this->hotelService = $hotelService;
+        $this->hotelRoomService = $hotelRoomService;
     }
 
     public function getHotelDetails() {
@@ -89,47 +92,30 @@ class ReservationApiController extends Controller{
         $checkout = strtotime($request["checkout"]." 12:00:00");
         $hotel_id = $request["hotel_id"];
 
-        $hotelRooms = $this->hotelService->getRoomsByHotelId($hotel_id);
+        if($checkout <= $checkin){
+            return response()->json([
+                'status' => false,
+                'message' => 'Please check again your checkIn checkOut date fields..'
+            ]);
+        } else {
+            $hotelRooms = $this->hotelService->getRoomsByHotelId($hotel_id);
 
-        $available_hotel_rooms = [];
-        foreach ($hotelRooms as $key => $hotelRoom) {
-            $reservations_of_room = $hotelRoom->reservations;
-            $check = true;
-            foreach ($reservations_of_room as $key2 => $reservation) {
-                $reservation_checkIn  = strtotime($reservation->checkin_date_time);
-                $reservation_checkOut = strtotime($reservation->checkout_date_time);
-                
-                if(($checkin<=$reservation_checkIn)){
-                    // current reservation checkin after or at same time to your checkin
-                    if($reservation_checkIn<$checkout){
-                        // current reservation checkin before your checkout
-                        $check = false; break;
-                    }
-
-                    if($reservation_checkOut<=$checkout){
-                        // current reservation checkouts before or at same to your checkout
-                        $check = false; break;
-                    }
-                }
-
-                if($checkin>=$reservation_checkIn && $checkin<$reservation_checkOut){
-                    //your checkin is between current reservation checkin & checkout
-                    $check  = false; break;
+            $available_hotel_rooms = [];
+            foreach ($hotelRooms as $key => $hotelRoom) {
+                $check = $this->hotelRoomService->checkIfRoomAvailable($checkin, $checkout, $hotelRoom);
+                if($check){
+                    $available_hotel_rooms[] = $hotelRoom;
                 }
             }
 
-            if($check == true){
-                $available_hotel_rooms[] = $hotelRoom;
-            }
+            return response()->json([
+                'status' => true,
+                'checkIn' => $request["checkin"]." 12:00:00",
+                'checkout' => $request["checkout"]." 12:00:00",
+                'message' => 'Available Rooms recieved..',
+                'reservation_data' => $available_hotel_rooms
+            ]);
         }
-
-        return response()->json([
-            'status' => true,
-            'checkIn' => $request["checkin"]." 12:00:00",
-            'checkout' => $request["checkout"]." 12:00:00",
-            'message' => 'Available Rooms recieved..',
-            'reservation_data' => $available_hotel_rooms
-        ]);
 
     }
 }

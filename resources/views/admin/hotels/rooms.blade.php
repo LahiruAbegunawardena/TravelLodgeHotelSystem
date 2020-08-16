@@ -26,6 +26,32 @@
       <div class="row">
         <div class="col-md-12">
             <div class="card">
+              <div class="card-header">
+                  <h4 class="card-title">Room Reservation</h4>
+              </div>
+              <div class="card-body">
+                {{ Form::open(array('url' => url('admin/hotels/'.$hotel_data["id"].'/get-available-rooms'),'method'=>'POST')) }}
+                    <div class="row">
+                      <div class="form-group col-md-6">
+                        <div class="form-group">
+                          <label for="checkin">Check In Date</label>
+                          {!! Form::date('checkin', null, array('min' => Date('Y-m-d'), 'class' => 'form-control')) !!}
+                        </div>
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <div class="form-group">
+                          <label for="checkout">Check Out Date</label>
+                          {!! Form::date('checkout', null, array('min' => Date('Y-m-d'), 'class' => 'form-control')) !!}
+                        </div>
+                      </div>
+                      
+                      <button type="submit" class="btn btn-primary">Check Available Rooms</button>
+                    </div>
+                  {{ Form::close() }}
+              </div>
+            </div>
+            <div class="card">
                 <div class="card-header">
                     <h4 class="card-title"> Update Hotel Rooms</h4>
                 </div>
@@ -87,7 +113,7 @@
                         </td>
                         <td>Rs. {{number_format($hotelRoom->price_per_night, 2, ".", "")}}</td>
                         <td>
-                          <a href="{{url('/admin/hotel-room/'.$hotelRoom->id.'/check-availability')}}" class="btn btn-block bg-gradient-info btn-xs"> Check Reservations </a>
+                          <a href="{{url('/admin/hotel-room/'.$hotelRoom->id.'/reservations')}}" class="btn btn-block bg-gradient-info btn-xs"> Check Reservations </a>
                         </td>
                       </tr>
                     @endforeach

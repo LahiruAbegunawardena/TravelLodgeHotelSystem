@@ -35,7 +35,9 @@ Route::middleware('auth:web')->group(function () {
 
     Route::get('/admin/hotels/{hotel_id}/rooms', 'Admin\HotelRoomController@viewHotelRooms')->name('hotelRooms');
     Route::post('/admin/hotels/{hotel_id}/update-rooms', 'Admin\HotelRoomController@updateHotelRooms')->name('updateRooms');
-    Route::get('/admin/hotel-room/{room_id}/check-availability', 'Admin\HotelRoomController@checkAvailabities');
+    Route::get('/admin/hotel-room/{room_id}/reservations', 'Admin\HotelRoomController@checkAvailabities');
+    Route::post('/admin/hotels/{hotel_id}/get-available-rooms', 'Admin\HotelRoomController@getAvailableRooms');
+    Route::post('/admin/hotels/{hotel_id}/reserve-rooms', 'Admin\HotelRoomController@reserveRooms');
 
     Route::get('/admin/customers', 'Admin\CustomerController@index')->name('customersIndex');
     Route::get('/admin/customer/{customer_id}/reservations', 'Admin\CustomerController@checkReservations');
